@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/widgets_and_constants/constants.dart';
+import 'package:flutter_application_2/widgets_and_constants/btn_widget.dart';
 
 class upload extends StatefulWidget {
   @override
@@ -21,10 +21,23 @@ body: Center(
         radius: 70,
 
       ),
-      SizedBox(height: 25,),
-      button('Upload from Camera'),
+      SizedBox(height: 30,),
+      btnWidget(
+  title:'Upload from Camera',
+  onPress: () {
+print('from Camera');
+  },
+),
+      
       SizedBox(height: 10,),
-      button('Upload from Gallery'),
+      btnWidget(
+  title:'Upload from Gallery',
+  onPress: () {
+print('from Gallery');
+  },
+),
+
+
 
 
     ],
@@ -34,17 +47,5 @@ body: Center(
             )
                     );
 
-}
-
-ElevatedButton button(String title) {
-  return ElevatedButton(
-      onPressed: ()=>{}, child: Text(title , style:btnTitle() ,),
-       style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 11),
-              backgroundColor: Constants.mainColor, 
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-
-            ),
-      );
 }
  }

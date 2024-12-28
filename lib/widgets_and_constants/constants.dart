@@ -7,11 +7,22 @@ class Constants {
 
 }
 TextStyle mainTitle (){
-  return TextStyle(fontSize: 30, fontWeight: FontWeight.bold ,color:Constants.blackColor );
+  return TextStyle(
+    fontSize: 30, 
+    fontWeight: FontWeight.bold ,
+    color:Constants.blackColor 
+    );
 }
 TextStyle secTitle (){
-  return TextStyle(fontSize: 14,color:Constants.greyColor);
+  return TextStyle(
+    fontSize: 14,
+    color:Constants.greyColor
+    );
 }
-TextStyle btnTitle (){
-  return TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color:Colors.white);
+TextStyle btnTitle(Color? r) {
+  return TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.bold,
+    color: r ?? Colors.white,
+  );
 }
