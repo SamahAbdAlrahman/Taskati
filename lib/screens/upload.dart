@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskati/widgets_and_constants/btn_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-
+import 'package:hive_flutter/hive_flutter.dart';
 import '../functions/navigator.dart';
 import '../widgets_and_constants/constants.dart';
 import 'home.dart'; // file
@@ -26,10 +26,37 @@ Widget build(BuildContext context) {
 appBar: AppBar(
   actions: [
     TextButton(
-        onPressed: (){
-if(NameFormKey.currentState!.validate()){
+        onPressed: ()async{
+if(NameFormKey.currentState!.validate() ){
+
+  var userBox = await Hive.openBox('user');
+  userBox.put('name', nameController.text);
+  userBox.put('image', _selectedImage?.path);
+
+
   pushReplace(context,home());
+
 }
+else if (_selectedImage == null) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Error', style: mainTitle()),
+        content: Text('Please select a profile image', style: secTitle()),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 else {
   print("Invalid name !");
   showDialog(

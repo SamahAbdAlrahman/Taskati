@@ -4,6 +4,7 @@ import 'package:taskati/screens/upload.dart';
 import 'package:taskati/functions/navigator.dart';
 import 'package:lottie/lottie.dart';
 
+import 'package:hive_flutter/hive_flutter.dart';
 
 class MyApp extends StatelessWidget{
     @override
