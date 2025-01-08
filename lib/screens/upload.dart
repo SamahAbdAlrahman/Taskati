@@ -29,9 +29,12 @@ appBar: AppBar(
         onPressed: ()async{
 if(NameFormKey.currentState!.validate() ){
 
-  var userBox = await Hive.openBox('user');
+  // var userBox = await Hive.openBox('user'); // فتحناه في المين لانه 
+  var userBox = Hive.box('user');
+
   userBox.put('name', nameController.text);
   userBox.put('image', _selectedImage?.path);
+  userBox.put("isUploaded", true);
 
 
   pushReplace(context,home());
