@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskati/widgets_and_constants/constants.dart';
 import 'package:taskati/screens/upload.dart';
-import 'package:taskati/functions/navigator.dart';
+import 'package:taskati/core/functions/navigator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'home.dart'; 

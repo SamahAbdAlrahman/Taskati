@@ -3,7 +3,7 @@ import 'package:taskati/widgets_and_constants/btn_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
-import '../functions/navigator.dart';
+import '../core/functions/navigator.dart';
 import '../widgets_and_constants/constants.dart';
 import 'home.dart'; // file
 
