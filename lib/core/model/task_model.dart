@@ -14,7 +14,7 @@ String endTime;
 
 int Color;
 
-bool isCompleted;
+bool isCompleted = false;
 
 TaskModel(
   {

@@ -20,6 +20,7 @@ class _uploadState extends State<upload> {
 Widget build(BuildContext context) { 
           return MaterialApp(
           debugShowCheckedModeBanner: false,
+              color: Colors.white,
 
             home: Scaffold(
 

@@ -8,6 +8,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:taskati/core/functions/navigator.dart';
 import 'package:taskati/screens/addTask.dart';
+import 'package:taskati/screens/completedTasks.dart';
+
 
 class home extends StatefulWidget{
   @override
@@ -21,7 +23,9 @@ class homeState  extends State<home>{
     String name = userBox.get('name');
     String imagePath = userBox.get('image');
     return Scaffold(
-      // appBar: AppBar(
+        backgroundColor: Colors.white,
+
+        // appBar: AppBar(
       //   title: Text('Home Page'),
       // ),
       body:SafeArea(
@@ -47,6 +51,12 @@ Spacer(),
                 ],
               ),
            SizedBox(height: 25,),
+              btnWidget(onPress: () {
+                push(context,CompletedTasksPage());
+              }, title: 'Completed Tasks  ✔️',width: 600,),
+
+              SizedBox(height: 25,),
+
               Row(
                 children: [
                   Column(
@@ -71,26 +81,34 @@ Spacer(),
                 selectionColor: Constants.mainColor,
                 selectedTextColor: Colors.white,
                 onDateChange: (date) {
-                  // New date selected
-                  // setState(() {
-                  //   _selectedValue = date;
-                  // });
+                
                 },
               ),
+
                             SizedBox(height: 20),
 
 Expanded(
 child: ValueListenableBuilder(
   valueListenable: Hive.box('task').listenable(), // تتسمع عل البوكس
   builder: (context,Box task_box,child){ // لما يصير تغير رح يعيد بناء هاد
-  var tasks=task_box.values.toList();
+  
+  // var tasks=task_box.values.toList();
+       var tasks = task_box.values.where((task) => task.isCompleted == false).toList();
+
     return  ListView.builder(
     itemCount: tasks.length,
     itemBuilder: (contex,index){
       return Dismissible(
+
        onDismissed: (direction) {
-  if (direction == DismissDirection.startToEnd) {
+         var task = task_box.getAt(index); // يلي سحبناه
+
+         if (direction == DismissDirection.startToEnd) {
+    // تاسكات مكتملة
     //  السحب من اليسار إلى اليمين
+      task.isCompleted = true;
+      task_box.put(task.id, task);
+    
 
   } else if (direction == DismissDirection.endToStart) {
     // من اليمين إلى اليسار
@@ -157,6 +175,7 @@ child: ValueListenableBuilder(
 
   // task
         child: TaskWidget(task:tasks[index] ,),
+
       );
     }
   );

@@ -33,12 +33,12 @@ class myState extends State<MyBody> {
 
     Future.delayed(Duration(seconds: 5), () {
 
-if(userBox.get("isUploaded")){
- push(context,home());
+      if (userBox.get("isUploaded") != null && userBox.get("isUploaded") == true) {
+        pushReplace(context,home());
  
 }
 else
-push(context,upload());
+        pushReplace(context,upload());
 
     }    
     
@@ -48,16 +48,20 @@ push(context,upload());
   }
     @override
     Widget build(BuildContext context){
-        return  Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Lottie.asset('assets/anim.json'),
-              Text('Taskati',style: mainTitle(),),
-              Text('its time to be organized',style: secTitle(),),
-            ],
-            
-           
+        return  Container(
+          color: Colors.white,
+
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Lottie.asset('assets/anim.json'),
+                Text('Taskati',style: mainTitle(),),
+                Text('its time to be organized',style: secTitle(),),
+              ],
+
+
+            ),
           ),
         );
 

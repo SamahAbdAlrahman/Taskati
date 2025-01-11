@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taskati/screens/splash.dart';
 import 'package:taskati/core/model/task_adapter.dart';
+import 'package:taskati/screens/userProfile.dart';
 import 'package:taskati/widgets_and_constants/constants.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -18,36 +19,10 @@ void main() async{
     await Hive.openBox("task");
 
 
-    // runApp(MyApp());
-     @override
-    Widget build(BuildContext context){
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-            title: 'taskite App',
-            home:Theme(
-  data: Theme.of(context).copyWith(
-    inputDecorationTheme: InputDecorationTheme(
-      errorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color:  Constants.redColor, width: 1.5), // الإطار عند الخطأ
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderSide: BorderSide(color:  Constants.redColor, width: 2.5), // الإطار عند التركيز مع الخطأ
-      ),
-      errorStyle: TextStyle(
-        color: Constants.redColor,
-        fontSize: 14,
-      ),
+    runApp(MyApp());
 
-    ),
-  ),
-              child: Scaffold(
-              
-              body: MyBody(),
-              ),
-            )
-                    );
-    }
 }
+
 
 
 
