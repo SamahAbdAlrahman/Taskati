@@ -84,7 +84,7 @@ Spacer(),
                 selectedTextColor: Colors.white,
                 onDateChange: (date) {
                   selectedDate.value = date;
-                  print(selectedDate.value);
+                  print("Selected Date: ${selectedDate.value}");
 
                 },
               ),
@@ -92,31 +92,38 @@ Spacer(),
                             SizedBox(height: 20),
 
 Expanded(
-child: ValueListenableBuilder(
-valueListenable: selectedDate,
-    builder: (context, DateTime date, _) {
 
+  child: ValueListenableBuilder(
+
+    valueListenable: selectedDate, // تتسمع عل اتاريخ المختار
+
+    builder: (context, DateTime date, _) {// لما يصير تغير رح يعيد بناء هاد
       return ValueListenableBuilder(
+
         valueListenable: Hive.box('task').listenable(), // تتسمع عل البوكس
+
         builder: (context,Box task_box,child){ // لما يصير تغير رح يعيد بناء هاد
-          // كلهن
-          // var tasks=task_box.values.toList();
-          // تاسكات مش مكتملة الكل
+
+// var tasks=task_box.values.toList();
           // var tasks = task_box.values.where((task) => task.isCompleted == false).toList();
 
-          // var task_by_Date = task_box.values.where((task) {
-          //   return task.date.toString().substring(0, 10) ==
-          //       date.toString().substring(0, 10);
-          // }).toList();
-          DateFormat dateFormat = DateFormat('yyyy-MM-dd');  // تعديل التنسيق حسب الحاجة
-
           var filteredTasks = task_box.values.where((task) {
-            DateTime taskDate = DateTime.parse(task.date);  // تأكد من التنسيق الصحيح
-            String taskDateFormatted = dateFormat.format(taskDate);
-            String selectedDateFormatted = dateFormat.format(selectedDate.value);
+            // 1
+            // date : 12/01/2025
+            // (task.date) ->  DateTime
+            DateTime taskDate = DateFormat("dd/MM/yyyy").parse(task.date).toLocal();
 
-            return taskDateFormatted == selectedDateFormatted && task.isCompleted == false;
+            // 2
+            // Selected Date: 2025-01-12 00:00:00.000
+            // تحويل التاريخ المختار إلى نفس التنسيق (12/01/2025)
+            DateTime selectedDay = DateTime(selectedDate.value.year, selectedDate.value.month, selectedDate.value.day);
+
+            // 3
+            return taskDate.isAtSameMomentAs(selectedDay) && task.isCompleted == false;
           }).toList();
+
+
+
 
 
           return  ListView.builder(
@@ -125,6 +132,7 @@ valueListenable: selectedDate,
                 return Dismissible(
 
                   child: TaskWidget(task:filteredTasks[index] ,),
+
 
                   onDismissed: (direction) {
                     var completed_task = task_box.getAt(index); // يلي سحبناه
@@ -206,8 +214,10 @@ valueListenable: selectedDate,
           );
         },
       );
+
+
     },
-),
+  ),
 ),
 
             ],

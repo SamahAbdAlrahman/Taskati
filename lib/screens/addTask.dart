@@ -270,9 +270,13 @@ class addTaskState  extends State<addTask>{
        var task_box = Hive.box("task");
 
        task_box.put(newTask.id, newTask); // key , value
+print("task added done , task info : ");
 
-       print(task_box.get(newTask.id)?.id);
-       print(task_box.get(newTask.id)?.title);
+      print("id : ${task_box.get(newTask.id)?.id}");
+      print("title : ${task_box.get(newTask.id)?.title}");
+      print("date : ${task_box.get(newTask.id)?.date}");
+
+
 
           pushReplace(context, home());
               }
