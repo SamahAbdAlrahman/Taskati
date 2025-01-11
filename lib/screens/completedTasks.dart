@@ -49,8 +49,78 @@ style: TextStyle(
                     return ListView.builder(
                       itemCount: tasks.length,
                       itemBuilder: (context, index) {
-                        var task = tasks[index];
-                        return TaskWidget(task: task); // عرض المهمة
+                                   var task = tasks[index];
+                                   return TaskWidget(task: task); // عرض المهمة
+
+
+      //              return Dismissible(
+      // key: UniqueKey(),
+      // child: TaskWidget(task: task);
+
+//       background: Container(
+//         margin: EdgeInsets.only(bottom: 17, top: 2),
+//         decoration: BoxDecoration(
+//           color: Colors.redAccent,
+//           borderRadius: BorderRadius.all(
+//             Radius.circular(10),
+//           ),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.grey.withOpacity(0.5),
+//               offset: Offset(2, 4),
+//               blurRadius: 6,
+//               spreadRadius: 1,
+//             ),
+//           ],
+//         ),
+//         child: Row(
+//           children: [
+//             Icon(Icons.done, color: Colors.white),
+//             Text("Delete", style: btnTitle(Colors.white)),
+//           ],
+//         ),
+//       ),
+
+// secondaryBackground:  Container(
+//         margin: EdgeInsets.only(bottom: 17, top: 2),
+//         decoration: BoxDecoration(
+//           color: Colors.redAccent,
+//           borderRadius: BorderRadius.all(
+//             Radius.circular(10),
+//           ),
+//           boxShadow: [
+//             BoxShadow(
+//               color: Colors.grey.withOpacity(0.5),
+//               offset: Offset(2, 4),
+//               blurRadius: 6,
+//               spreadRadius: 1,
+//             ),
+//           ],
+//         ),
+//         child: Row(
+//           children: [
+//             Icon(Icons.done, color: Colors.white),
+//             Text("Delete", style: btnTitle(Colors.white)),
+//           ],
+//         ),
+//       ),
+
+// onDismissed: (direction) {
+
+//          if (direction == DismissDirection.startToEnd) {
+//     //  السحب من اليسار إلى اليمين
+    
+//     taskBox.deleteAt(index);
+
+//   } 
+//   else if (direction == DismissDirection.endToStart) {
+//     // من اليمين إلى اليسار
+//         taskBox.deleteAt(index);
+
+//   }
+// },
+
+//     );
                       },
                     );
                   },
