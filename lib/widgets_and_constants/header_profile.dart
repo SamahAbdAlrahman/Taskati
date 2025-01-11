@@ -239,7 +239,7 @@ class _headerProfileState extends State<headerProfile> {
             Text("${name}",
                 style: TextStyle(
                 color: Constants.mainColor,
-                fontSize: 22,
+                fontSize: 21,
                 fontWeight: FontWeight.w500
             ),
         ),

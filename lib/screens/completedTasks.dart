@@ -34,8 +34,10 @@ style: TextStyle(
             children: [
               Text(
             "Great job! Keep going and complete your tasks!",
+              textAlign:TextAlign.center,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
+              SizedBox(height: 20,),
               Expanded(
                 child: ValueListenableBuilder(
                   valueListenable: Hive.box('task').listenable(),

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:taskati/screens/userProfile.dart';
 import 'package:taskati/widgets_and_constants/task_widget.dart';
 import '../widgets_and_constants/btn_widget.dart';
 import '../widgets_and_constants/constants.dart';
@@ -9,6 +10,7 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:taskati/core/functions/navigator.dart';
 import 'package:taskati/screens/addTask.dart';
 import 'package:taskati/screens/completedTasks.dart';
+
 
 
 class home extends StatefulWidget{
@@ -25,6 +27,56 @@ class homeState  extends State<home>{
      ValueNotifier<DateTime> selectedDate = ValueNotifier<DateTime>(DateTime.now()); //
 
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+        ),
+        drawer: Drawer(
+          backgroundColor: Colors.white,
+            child:SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0,top: 80),
+
+                   child:  Padding(
+                     
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Column(
+
+                        children: [
+                          CircleAvatar(
+                            radius: 60,
+                            backgroundImage: FileImage(File(imagePath)), // عرض الصورة
+                          ),
+                          SizedBox(height: 10,),
+                          Text("${name}!",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color:Constants.blackColor
+                            ),
+                          ),
+                          Divider(
+                            color: Constants.greyColor.withOpacity(0.5),
+                            height: 20,
+                            thickness: 0.8,
+                            indent: 20,
+                            endIndent: 20,
+                          ),
+                          SizedBox(height: 40,),
+
+                          drawerItem(title: "My Profile",icon: Icons.account_circle_outlined,SecondPage: profile(),),
+                          SizedBox(height: 20,),
+                          drawerItem(title: "Completed Tasks",icon: Icons.check_circle_outline),
+                          SizedBox(height: 20,),
+                          drawerItem(title: "Add Task",icon: Icons.add_comment_outlined),
+
+                        ],
+
+
+                    ),
+
+                ),
+              ),
+            ),
+        ),
         backgroundColor: Colors.white,
 
         // appBar: AppBar(
@@ -32,7 +84,7 @@ class homeState  extends State<home>{
       // ),
       body:SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               Row(
@@ -41,7 +93,13 @@ class homeState  extends State<home>{
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Hello, ${name}!",style: mainTitle(),),
+                      Text("Hello, ${name}!",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold ,
+                            color:Constants.blackColor
+                        ),
+                      ),
                       Text("Have a nice day",style: secTitle()),
                     ],
                   ),
@@ -228,4 +286,64 @@ Expanded(
     );
   }
 
+}
+
+class drawerItem extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Widget? SecondPage;
+
+  const drawerItem({
+    super.key,
+    required this.title,
+    required this.icon,
+    this.SecondPage
+
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          padding:EdgeInsets.all(6) ,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Constants.mainColor.withOpacity(0.5),
+              boxShadow :[
+                BoxShadow(
+                  color: Colors.white,
+                  offset: Offset(0, 0),
+                  blurRadius: 1,            // تشويش
+                  spreadRadius: 2.5,          //مدى الانتشار
+                ),
+              ]
+          ),
+    // Icons.account_circle_outlined
+          child: Icon( icon,
+            color: Constants.mainColor,
+            // size: 25,
+          ),
+        ),
+        SizedBox(width: 8,),
+        ElevatedButton(
+          style:ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+          ),
+          onPressed: (){
+            pushReplace(context,SecondPage!);
+          },
+          child:
+          Text(
+            title , style: TextStyle(
+              color:   Colors.black,
+              fontSize: 16,
+              // fontWeight: FontWeight.w500
+          ),),
+        ),
+    
+      ],
+    );
+  }
 }

@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:taskati/widgets_and_constants/header_profile.dart';
 import 'dart:io';
+import '../widgets_and_constants/list_widget.dart';
 import 'home.dart';
 class profile extends StatefulWidget{
   @override
@@ -25,8 +26,8 @@ return MaterialApp(
     backgroundColor: Constants.mainColor,
     leading: IconButton(
         onPressed: (){
-          Navigator.pop(context);
-          // push(context, home());
+          // Navigator.pop(context);
+          push(context, home());
         }, icon: Icon(Icons.arrow_back_ios, color: Colors.white,)),
 title: Text("Profile",
 style: TextStyle(
@@ -74,81 +75,6 @@ style: TextStyle(
   ),
 ),
 );
-  }
-}
-
-class custmList extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final Color? c;
-  const custmList({
-    super.key,
-    required this.icon,
-    required this.title,
-     this.c,
-
-
-
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-    
-    children: [
-      Row(
-    children: [
-      Container(
-        padding:EdgeInsets.all(6) ,
-         decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Constants.mainColor.withOpacity(0.5),
-                    boxShadow :[
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(0, 0),
-                        blurRadius: 1,            // تشويش
-                        spreadRadius: 2.5,          //مدى الانتشار
-                      ),
-                    ]
-                ),
-        child: Icon(icon , 
-        color: Constants.mainColor,
-        // size: 25,
-        ),
-      ),
-      SizedBox(width: 15,),
-      Text(
-        title , style: TextStyle(
-          color: c,
-          fontSize: 18,
-              fontWeight: FontWeight.w500
-      ),),
-    
-      ],
-      ),
-      Spacer(),
-       Container(
-        padding:EdgeInsets.all(8) ,
-         decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: const Color.fromARGB(181, 158, 158, 158).withOpacity(0.23),
-                    boxShadow :[
-                      BoxShadow(
-                        color: Colors.white,
-                        offset: Offset(0, 0),
-                        blurRadius: 1,            // تشويش
-                        spreadRadius: 2.5,          //مدى الانتشار
-                      ),
-                    ]
-                ),
-        child: Icon(Icons.arrow_forward_ios_rounded,
-                  color: const Color.fromARGB(255, 141, 140, 140),
-        size: 20,
-        ),
-      ),
-     
-    ],    );
   }
 }
 
